@@ -23,14 +23,6 @@ float flat, flon;
 unsigned long fix_age;
 
 void loop(){
-  //delay(1999);
-  //getTime();
-  //sendPost();
-     //Read for new byte on serial hardware,
-     //and write them on NewSoftSerial.
-     //serialhwread();
-     //Read for new byte on NewSoftSerial.
-     //serialswread();
 
    smartdelay(1000);
    gps.f_get_position(&flat, &flon, &fix_age);
@@ -53,10 +45,6 @@ static void smartdelay(unsigned long ms)
   } while (millis() - start < ms);
 }
 
-//void getTime(){
-//
-//  
-//}
 
 void sendPost(){
   char str_flon[12];
@@ -92,7 +80,11 @@ void sendPost(){
     //Read until serial buffer is empty.
     gsm.WhileSimpleRead();
 
-    numdata=inet.httpPOST("api.gadgetkeeper.com", 80, "/v1/things/c30ffa13798a11e588351d22ae2d0d02/events/445ae266798b11e588351d22ae2d0d02/datapoints.json", msgBuffer,msgBuffer, 100);
+    //Create your api Call by replacing your Thing_Id, Event_Id and API_Key.
+    //To obtain the Thing Id, see instructions http://docs.gadgetkeeper.com/display/docs/Thing+Id */
+    //To obtain the Event Id see instructions http://wiki.gadgetkeeper.com/display/docs/Event+Id  */
+    //To obtain the API Key see instructions http://docs.gadgetkeeper.com/display/docs/API+Keys */
+    numdata=inet.httpPOST("api.gadgetkeeper.com", 80, "/v1/things/Thing_Id/events/Event_Id/datapoints.json","API_Key", msgBuffer,msgBuffer, 100);
     //Print the results.
     Serial.println("\nNumber of data received:");
     Serial.println(numdata);
